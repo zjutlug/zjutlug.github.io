@@ -1,3 +1,5 @@
+http://zjutlug.github.io/calendar/
+http://zjutlug.github.io/calendar/events.json
 http://zjutlug.github.io/about/
 http://zjutlug.github.io/2025/11/29/ZJUTLUG_first_installation_party/
 http://zjutlug.github.io/

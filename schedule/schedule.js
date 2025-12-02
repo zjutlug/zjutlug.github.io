@@ -30,6 +30,29 @@ const now = new Date();
 function cardRefreshTimes() {
   const e = document.getElementById("card-widget-schedule");
   if (e) {
+    fetch("/calendar/events.json")
+      .then((response) => response.json())
+      .then((events) => {
+        const nextEvent = events
+          .map((e) => ({ ...e, date: new Date(e.start.replace(/-/g, "/")) }))
+          .filter((e) => e.date >= now)
+          .sort((a, b) => a.date - b.date)[0];
+
+        if (nextEvent) {
+          const daysUntil = Math.ceil((nextEvent.date - now) / 1e3 / 60 / 60 / 24);
+          e.querySelector("#schedule-title").innerHTML = `距离 ${nextEvent.title}`;
+          e.querySelector("#schedule-days").innerHTML = daysUntil;
+          e.querySelector("#schedule-date").innerHTML = nextEvent.start;
+        } else {
+          e.querySelector("#schedule-title").innerHTML = "暂无近期活动";
+          e.querySelector("#schedule-days").innerHTML = "0";
+          e.querySelector("#schedule-date").innerHTML = "敬请期待";
+        }
+      })
+      .catch((error) => console.error("Error loading events:", error));
+    if (!asideTime) {
+      asideTime = new Date(`${new Date().getFullYear()}/01/01 00:00:00`);
+    }
     asideDay = (now - asideTime) / 1e3 / 60 / 60 / 24;
     e.querySelector("#pBar_year").value = asideDay;
     e.querySelector("#p_span_year").innerHTML =
@@ -122,13 +145,9 @@ function cardTimes() {
     const lunarDate = chineseLunar.solarToLunar(new Date(year, month, date));
     animalYear = chineseLunar.format(lunarDate, "A");
     ganzhiYear = chineseLunar.format(lunarDate, "T").slice(0, -1);
-    lunarMon = chineseLunar.format(lunarDate, "M");
-    lunarDay = chineseLunar.format(lunarDate, "d");
+    const lunarMon = chineseLunar.format(lunarDate, "M");
+    const lunarDay = chineseLunar.format(lunarDate, "d");
 
-    const newYearDate = new Date("2026/02/17 00:00:00");
-    const daysUntilNewYear = Math.floor(
-      (newYearDate - now) / 1e3 / 60 / 60 / 24
-    );
     asideTime = new Date(`${new Date().getFullYear()}/01/01 00:00:00`);
     asideDay = (now - asideTime) / 1e3 / 60 / 60 / 24;
     asideDayNum = Math.floor(asideDay);
@@ -149,6 +168,5 @@ function cardTimes() {
     e.querySelector(
       "#calendar-lunar"
     ).innerHTML = `${ganzhiYear}${animalYear}年&nbsp;${lunarMon}${lunarDay}`;
-    document.getElementById("schedule-days").innerHTML = daysUntilNewYear;
   }
 }
