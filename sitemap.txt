@@ -1,7 +1,9 @@
-http://zjutlug.github.io/calendar/
-http://zjutlug.github.io/calendar/events.json
-http://zjutlug.github.io/about/
-http://zjutlug.github.io/2025/11/29/ZJUTLUG_first_installation_party/
-http://zjutlug.github.io/
-http://zjutlug.github.io/tags/%E6%B4%BB%E5%8A%A8/
-http://zjutlug.github.io/tags/%E5%BC%80%E6%BA%90/
+https://zjutlug.cn/2025/12/03/zjutlug_new_domain/
+https://zjutlug.cn/2025/11/29/ZJUTLUG_first_installation_party/
+https://zjutlug.cn/calendar/events.json
+https://zjutlug.cn/calendar/
+https://zjutlug.cn/about/
+https://zjutlug.cn/
+https://zjutlug.cn/tags/%E6%B4%BB%E5%8A%A8/
+https://zjutlug.cn/tags/%E5%BC%80%E6%BA%90/
+https://zjutlug.cn/tags/%E5%85%AC%E5%91%8A/
